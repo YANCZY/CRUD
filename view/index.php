@@ -139,7 +139,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closecreate">Close</button>
                     <button type="button" class="btn btn-primary adduser" id="adduser">Submit</button>
                 </div>
                 </div>
@@ -303,6 +303,9 @@
          <!-- JQuery -->
          <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
+           <!-- Swal Message Alert -->
+         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+         <script src="sweetalert2.all.min.js"></script>
 
         <!-- JAVASCRIPT -->
         <script src="assets/libs/jquery/jquery.min.js"></script>
@@ -317,43 +320,117 @@
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
-
-
+        
+        <!-- Include the separate JavaScript file -->
+        <script src="delete-user.js"></script>
+        <script src="deleteUser.js"></script>
+        
         <script>
             $(document).ready(function() {
+                // Click event handler for delete buttons
+                $('.delete-user').click(function() {
+                    var userId = $(this).data('user-id');
 
-               $('.adduser').click(function(e) {
-                    e.preventDefault();
-                    
-                    var name = $('.addName').val();
-                    var email = $('.addEmail').val();
-                    var username = $('.addUsername').val();
-                    var password = $('.addPassword').val();
-                    var mobile = $('.addMobile').val();
-                    var phone = $('.addPhone').val();
-                    
-                    
-
-                    $.ajax({
-                        type: "POST",
-                        url: "../classes/createuser.class.php",
-                        data: {
-                            'submit': true,
-                            'name': name,
-                            'email': email,
-                            'username': username,
-                            'password': password,
-                            'mobile': mobile,
-                            'phone': phone,
-                        },
-                        success: function(response){
-                            console.log(response);
+                    // Display a confirmation dialog
+                    Swal.fire({
+                        title: 'Confirm Delete',
+                        text: 'Are you sure you want to delete this user?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Delete',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Send AJAX request to deleteuser.class.php
+                            $.ajax({
+                                type: 'POST',
+                                url: '../classes/deleteuser.class.php',
+                                
+                                data: {
+                                    'delete': true,
+                                    'userId': userId
+                                },
+                                
+                                success: function(response) {
+                                    var data = JSON.parse(response);
+                                    if (data.status === 'success') {
+                                        // Reload the page after successful deletion
+                                        location.reload();
+                                    } else {
+                                        // Display an error message
+                                        Swal.fire({
+                                            title: 'Error',
+                                            text: data.message,
+                                            icon: 'error',
+                                            confirmButtonText: 'Close'
+                                        });
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    // Display an error message
+                                    console.log(error);
+                                    console.log(status);
+                                    Swal.fire({
+                                        title: 'Error',
+                                        text: 'An error occurred while deleting the user.',
+                                        icon: 'error',
+                                        confirmButtonText: 'Close'
+                                    });
+                                }
+                            });
                         }
-                    })
-
-               });
-
+                    });
+                });
             });
+
+           $(document).ready(function() {
+                    $('.adduser').click(function(e) {
+                        e.preventDefault();
+
+                        var name = $('.addName').val();
+                        var email = $('.addEmail').val();
+                        var username = $('.addUsername').val();
+                        var password = $('.addPassword').val();
+                        var mobile = $('.addMobile').val();
+                        var phone = $('.addPhone').val();
+
+
+                        $.ajax({
+                            type: "POST",
+                            url: "../classes/createuser.class.php",
+                            data: {
+                                'submit': true,
+                                'name': name,
+                                'email': email,
+                                'username': username,
+                                'password': password,
+                                'mobile': mobile,
+                                'phone': phone,
+                            },
+                            success: function(response) {
+                                console.log(response);
+                                Swal.fire({
+                                    title: 'Sucess',
+                                    text: 'Created Successfully',
+                                    icon: 'success',
+                                    confirmButtonText: 'Close'
+                                    })
+                                    setTimeout(function(){
+                                        location.reload();
+                                    }, 1000);
+                                    
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: 'Check Connection',
+                                    icon: 'error',
+                                    confirmButtonText: 'Close'
+                                    })
+                            }
+                        });
+                    });
+                });
         
 
         </script>
