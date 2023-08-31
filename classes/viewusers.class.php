@@ -32,7 +32,7 @@ class ViewUser extends Database{
                     </td>
                     <td>
                         <div class='d-flex gap-3'>
-                            <a href='javascript:void(0);' class='text-success'><i class='mdi mdi-pencil font-size-18'></i></a>
+                            <a href='javascript:void(0);' class='text-success edit-user' data-bs-toggle='modal' data-bs-target='#updateModal' data-bs-user-id='". $data['id'] ."' data-bs-user-name= '" . $data['name'] . "'  data-bs-user-email= '" . $data['email'] . "'  data-bs-user-username='" . $data['username'] . "' data-bs-user-mobile= '" . $data['mobile'] . "' data-bs-user-phone= '" . $data['phone'] . "' ><i class='mdi mdi-pencil font-size-18'></i></a>
                             <a href='javascript:void(0);' class='text-danger delete-user' data-user-id=". $data['id'] ."><i class='mdi mdi-delete font-size-18'></i></a>
                         </div>
                     </td>

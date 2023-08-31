@@ -146,9 +146,65 @@
             </div>
             </div>
 
-             <!-- ============================================================== -->
+            <!-- ============================================================== -->
             <!-- MODAL ADD USER END -->
             <!-- ============================================================== -->
+
+            <!-- ============================================================== -->
+            <!-- MODAL Update USER Start -->
+            <!-- ============================================================== -->
+
+            <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="updateModal">Update</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <input type="hidden" class="userIdToUpdate" id="userIdToUpdate" name="userIdToUpdate">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Name</label>
+                        <input type="text" class="form-control addName" id="recipient-name" placeholder="Mikey">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control addEmail" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="exampl@test.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Username:</label>
+                        <input type="text" class="form-control addUsername" id="recipient-name" placeholder="mikey">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Password:</label>
+                        <input type="password" class="form-control addPassword" id="recipient-name" placeholder="12*">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Mobile:</label>
+                        <input type="text" class="form-control addMobile" id="recipient-name" placeholder="+639552..">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Phone:</label>
+                        <input type="text" class="form-control addPhone" id="recipient-name" placeholder="521-8554">
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closecreate">Close</button>
+                    <button type="button" class="btn btn-primary updateButton" id="updateButton">Update</button>
+                </div>
+                </div>
+            </div>
+            </div>
+
+
+
+
+            <!-- ============================================================== -->
+            <!-- MODAL Update USER End -->
+            <!-- ============================================================== -->
+
 
             <!-- ============================================================== -->
             <!-- Start right Content here -->
@@ -326,8 +382,74 @@
         <script src="deleteUser.js"></script>
         
         <script>
-
             
+
+            // Update Functionality 
+            $(document).ready(function() {
+                var userIdToUpdate; // Declare a variable to store the user ID for updating
+
+                // Click event handler for "Edit" buttons
+                $('.edit-user').click(function() {
+                    userIdToUpdate = $(this).data('bs-user-id');  // Store the user ID in the variable
+                    var name = $(this).data('bs-user-name');
+                    var email = $(this).data('bs-user-email');
+                    var username = $(this).data('bs-user-username');
+                    var mobile = $(this).data('bs-user-mobile');
+                    var phone = $(this).data('bs-user-phone');
+
+                    $('.userIdToUpdate').val(userIdToUpdate);
+
+
+                    // Populate modal fields with user data
+                    $('#updateModal .addName').val(name);
+                    $('#updateModal .addEmail').val(email);
+                    $('#updateModal .addUsername').val(username);
+                    $('#updateModal .addMobile').val(mobile);
+                    $('#updateModal .addPhone').val(phone);
+
+                    // Open the modal
+                    $('#updateModal').modal('show');
+                });
+
+                // Click event handler for "Update" button in the modal
+                $('#updateButton').click(function() {
+                    var name = $('#updateModal .addName').val();
+                    var email = $('#updateModal .addEmail').val();
+                    var username = $('#updateModal .addUsername').val();
+                    var mobile = $('#updateModal .addMobile').val();
+                    var phone = $('#updateModal .addPhone').val();
+
+                    
+                   
+                    // Send AJAX request to updateuser.class.php
+                    $.ajax({
+                        type: 'POST',
+                        url: '../classes/updateuser.class.php',
+                        data: {
+                            'update': true,
+                            'userId': userIdToUpdate,
+                            'name': name,
+                            'email': email,
+                            'username': username,
+                            'mobile': mobile,
+                            'phone': phone,
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            // Reload the page or update the user details on the page
+                            location.reload();
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error);
+                            // Display an error message to the user
+                            alert('An error occurred while updating the user.');
+                        }
+                    });
+                });
+            });
+
+        
+             // Delete Functionality 
             $(document).ready(function() {
                 // Click event handler for delete buttons
                 $('.delete-user').click(function() {
@@ -385,6 +507,8 @@
                 });
             });
 
+
+             // Add Functionality 
            $(document).ready(function() {
                     $('.adduser').click(function(e) {
                         e.preventDefault();
