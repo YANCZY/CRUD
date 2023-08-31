@@ -197,17 +197,64 @@
                 </div>
             </div>
             </div>
-
-
-
-
             <!-- ============================================================== -->
             <!-- MODAL Update USER End -->
             <!-- ============================================================== -->
 
+             <!-- ============================================================== -->
+            <!-- MODAL View Details START -->
+            <!-- ============================================================== -->
+
+            <div class="modal fade" id="viewDeatails" tabindex="-1" aria-labelledby="viewDeatails" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="viewDeatails">View Details</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <input type="hidden" class="userIdToUpdate" id="userIdToUpdate" name="userIdToUpdate">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Name</label>
+                        <input type="text" class="form-control addName" id="recipient-name" placeholder="Mikey" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control addEmail" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="exampl@test.com" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Username:</label>
+                        <input type="text" class="form-control addUsername" id="recipient-name" placeholder="mikeyusername" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Password:</label>
+                        <input type="password" class="form-control addPassword" id="recipient-name" placeholder="12*" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Mobile:</label>
+                        <input type="text" class="form-control addMobile" id="recipient-name" placeholder="+639552.." disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Phone:</label>
+                        <input type="text" class="form-control addPhone" id="recipient-name" placeholder="521-8554" disabled>
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closecreate">Close</button>
+                </div>
+                </div>
+            </div>
+            </div>
 
             <!-- ============================================================== -->
-            <!-- Start right Content here -->
+            <!-- MODAL View Details End -->
+            <!-- ============================================================== -->
+
+
+           <!-- ============================================================== -->
+            <!-- START TABLE Content here -->
             <!-- ============================================================== -->
             <div class="main-content">
             <div class="page-content">
@@ -274,22 +321,23 @@
                     </div>
                 </div>
             </div>
-<!-- end modal -->
-
-<footer class="footer">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">
-                <script>document.write(new Date().getFullYear())</script> © Skote.
-            </div>
-            <div class="col-sm-6">
-                <div class="text-sm-end d-none d-sm-block">
-                    Design & Develop by Themesbrand
+            <!-- ============================================================== -->
+            <!-- END TABLE Content here -->
+            <!-- ============================================================== -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script> © Yanz.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Design & Develop by Yanz
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</footer>
+            </footer>
 </div>
             <!-- end main content-->
 
@@ -359,9 +407,9 @@
          <!-- JQuery -->
          <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
-           <!-- Swal Message Alert -->
-         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-         <script src="sweetalert2.all.min.js"></script>
+        <!-- Swal Message Alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="sweetalert2.all.min.js"></script>
 
         <!-- JAVASCRIPT -->
         <script src="assets/libs/jquery/jquery.min.js"></script>
@@ -377,161 +425,17 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
         
-        <!-- Include the separate JavaScript file -->
-        <script src="delete-user.js"></script>
-        <script src="deleteUser.js"></script>
+     
         
-        <script>
-            
-
-            // Update Functionality 
-            $(document).ready(function() {
-                var userIdToUpdate; // Declare a variable to store the user ID for updating
-
-                // Click event handler for "Edit" buttons
-                $('.edit-user').click(function() {
-                    userIdToUpdate = $(this).data('bs-user-id');  // Store the user ID in the variable
-                    var name = $(this).data('bs-user-name');
-                    var email = $(this).data('bs-user-email');
-                    var username = $(this).data('bs-user-username');
-                    var mobile = $(this).data('bs-user-mobile');
-                    var phone = $(this).data('bs-user-phone');
-
-                    $('.userIdToUpdate').val(userIdToUpdate);
-
-
-                    // Populate modal fields with user data
-                    $('#updateModal .addName').val(name);
-                    $('#updateModal .addEmail').val(email);
-                    $('#updateModal .addUsername').val(username);
-                    $('#updateModal .addMobile').val(mobile);
-                    $('#updateModal .addPhone').val(phone);
-
-                    // Open the modal
-                    $('#updateModal').modal('show');
-                });
-
-                // Click event handler for "Update" button in the modal
-                $('#updateButton').click(function() {
-                    var name = $('#updateModal .addName').val();
-                    var email = $('#updateModal .addEmail').val();
-                    var username = $('#updateModal .addUsername').val();
-                    var mobile = $('#updateModal .addMobile').val();
-                    var phone = $('#updateModal .addPhone').val();
-
-                    
-                   
-                    // Send AJAX request to updateuser.class.php
-                    $.ajax({
-                        type: 'POST',
-                        url: '../classes/updateuser.class.php',
-                        data: {
-                            'update': true,
-                            'userId': userIdToUpdate,
-                            'name': name,
-                            'email': email,
-                            'username': username,
-                            'mobile': mobile,
-                            'phone': phone,
-                        },
-                        success: function(response) {
-                            console.log(response);
-                            Swal.fire({
-                            title: 'Sucess',
-                            text: 'Updated Successfully',
-                            icon: 'success',
-                            confirmButtonText: 'Close'
-                            })
-                            setTimeout(function(){
-                                location.reload();
-                            }, 1000);
-                           
-                                    
-                        },
-                        error: function(xhr, status, error) {
-                            console.log(error);
-                            Swal.fire({
-                                title: 'Error',
-                                text: 'Check Connection',
-                                icon: 'error',
-                                confirmButtonText: 'Close'
-                            })
-                        }
-                    });
-                });
-            });
-
-        
-             // Delete Functionality 
-            $(document).ready(function() {
-                // Click event handler for delete buttons
-                $('.delete-user').click(function() {
-                    var userId = $(this).data('user-id');
-
-                    // Display a confirmation dialog
-                    Swal.fire({
-                        title: 'Confirm Delete',
-                        text: 'Are you sure you want to delete this user?',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonText: 'Delete',
-                        cancelButtonText: 'Cancel'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Send AJAX request to deleteuser.class.php
-                            $.ajax({
-                                type: 'POST',
-                                url: '../classes/deleteuser.class.php',
-                                
-                                data: {
-                                    'delete': true,
-                                    'userId': userId
-                                },
-                                
-                                success: function(response) {
-                                    var data = JSON.parse(response);
-                                    if (data.status === 'success') {
-                                        // Reload the page after successful deletion
-                                        Swal.fire({
-                                            title: 'Sucess',
-                                            text: 'Deleted Successfully',
-                                            icon: 'success',
-                                            confirmButtonText: 'Close'
-                                        })
-                                        setTimeout(function(){
-                                            location.reload();
-                                        }, 1000);
-
-                                    } else {
-                                        // Display an error message
-                                        Swal.fire({
-                                            title: 'Error',
-                                            text: data.message,
-                                            icon: 'error',
-                                            confirmButtonText: 'Close'
-                                        });
-                                    }
-                                },
-                                error: function(xhr, status, error) {
-                                    // Display an error message
-                                    console.log(error);
-                                    console.log(status);
-                                    Swal.fire({
-                                        title: 'Error',
-                                        text: 'An error occurred while deleting the user.',
-                                        icon: 'error',
-                                        confirmButtonText: 'Close'
-                                    });
-                                }
-                            });
-                        }
-                    });
-                });
-            });
-       </script>
-    
+       
         <!-- Add Functionality  -->
-       <script src="../javascript/add_user.js"></script>
+        <script src="../javascript/add_user.js"></script>
+        <!-- Update Functionality  -->
+        <script src="../javascript/update_user.js"></script>
+        <!-- Delete Functionality  -->
+        <script src="../javascript/delete_user.js"></script>
+        <!-- View Details Functionality  -->
+        <script src="../javascript/view_user.js"></script>
 
        
     </body>

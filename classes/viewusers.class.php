@@ -26,7 +26,7 @@ class ViewUser extends Database{
                     <td>" .$data['phone'] . " </td>
                     <td>
                         <!-- Button trigger modal -->
-                        <button type='button' class='btn btn-primary btn-sm btn-rounded' data-bs-toggle'modal' data-bs-target='.orderdetailsModal'>
+                        <button type='button' class='btn btn-primary btn-sm btn-rounded viewDeatails'  data-bs-toggle='modal' data-bs-target='#viewDeatails' data-bs-user-id='". $data['id'] ."' data-bs-user-name= '" . $data['name'] . "'  data-bs-user-email= '" . $data['email'] . "'  data-bs-user-username='" . $data['username'] . "' data-bs-user-mobile= '" . $data['mobile'] . "' data-bs-user-phone= '" . $data['phone'] . "' >
                             View Details
                         </button>
                     </td>

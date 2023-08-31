@@ -1,6 +1,5 @@
 $(document).ready(function() {
     $('.adduser').click(function(e) {
-        e.preventDefault();
 
         var name = $('.addName').val();
         var email = $('.addEmail').val();
