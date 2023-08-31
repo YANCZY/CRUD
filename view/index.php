@@ -326,6 +326,8 @@
         <script src="deleteUser.js"></script>
         
         <script>
+
+            
             $(document).ready(function() {
                 // Click event handler for delete buttons
                 $('.delete-user').click(function() {
