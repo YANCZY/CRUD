@@ -375,7 +375,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
         
         <!-- Include the separate JavaScript file -->
         <script src="delete-user.js"></script>
@@ -436,13 +436,26 @@
                         },
                         success: function(response) {
                             console.log(response);
-                            // Reload the page or update the user details on the page
-                            location.reload();
+                            Swal.fire({
+                            title: 'Sucess',
+                            text: 'Updated Successfully',
+                            icon: 'success',
+                            confirmButtonText: 'Close'
+                            })
+                            setTimeout(function(){
+                                location.reload();
+                            }, 1000);
+                           
+                                    
                         },
                         error: function(xhr, status, error) {
                             console.log(error);
-                            // Display an error message to the user
-                            alert('An error occurred while updating the user.');
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Check Connection',
+                                icon: 'error',
+                                confirmButtonText: 'Close'
+                            })
                         }
                     });
                 });
@@ -479,7 +492,16 @@
                                     var data = JSON.parse(response);
                                     if (data.status === 'success') {
                                         // Reload the page after successful deletion
-                                        location.reload();
+                                        Swal.fire({
+                                            title: 'Sucess',
+                                            text: 'Deleted Successfully',
+                                            icon: 'success',
+                                            confirmButtonText: 'Close'
+                                        })
+                                        setTimeout(function(){
+                                            location.reload();
+                                        }, 1000);
+
                                     } else {
                                         // Display an error message
                                         Swal.fire({
@@ -506,60 +528,10 @@
                     });
                 });
             });
-
-
-             // Add Functionality 
-           $(document).ready(function() {
-                    $('.adduser').click(function(e) {
-                        e.preventDefault();
-
-                        var name = $('.addName').val();
-                        var email = $('.addEmail').val();
-                        var username = $('.addUsername').val();
-                        var password = $('.addPassword').val();
-                        var mobile = $('.addMobile').val();
-                        var phone = $('.addPhone').val();
-
-
-                        $.ajax({
-                            type: "POST",
-                            url: "../classes/createuser.class.php",
-                            data: {
-                                'submit': true,
-                                'name': name,
-                                'email': email,
-                                'username': username,
-                                'password': password,
-                                'mobile': mobile,
-                                'phone': phone,
-                            },
-                            success: function(response) {
-                                console.log(response);
-                                Swal.fire({
-                                    title: 'Sucess',
-                                    text: 'Created Successfully',
-                                    icon: 'success',
-                                    confirmButtonText: 'Close'
-                                    })
-                                    setTimeout(function(){
-                                        location.reload();
-                                    }, 1000);
-                                    
-                            },
-                            error: function(xhr, status, error) {
-                                Swal.fire({
-                                    title: 'Error',
-                                    text: 'Check Connection',
-                                    icon: 'error',
-                                    confirmButtonText: 'Close'
-                                    })
-                            }
-                        });
-                    });
-                });
-        
-
-        </script>
+       </script>
+    
+        <!-- Add Functionality  -->
+       <script src="../javascript/add_user.js"></script>
 
        
     </body>
